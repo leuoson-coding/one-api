@@ -31,6 +31,14 @@ func SetApiRouter(router *gin.Engine) {
 		apiRouter.GET("/oauth/email/bind", middleware.CriticalRateLimit(), middleware.UserAuth(), controller.EmailBind)
 		apiRouter.POST("/topup", middleware.AdminAuth(), controller.AdminTopUp)
 
+		// VSCode认证专用路由
+		vscodeRouter := apiRouter.Group("/vscode")
+		{
+			vscodeRouter.GET("/authorize", middleware.CriticalRateLimit(), auth.VSCodeAuthorize)
+			vscodeRouter.POST("/callback", middleware.CriticalRateLimit(), auth.VSCodeCallback)
+			vscodeRouter.GET("/user", auth.VSCodeUser) // 这个接口需要token认证
+		}
+
 		userRoute := apiRouter.Group("/user")
 		{
 			userRoute.POST("/register", middleware.CriticalRateLimit(), middleware.TurnstileCheck(), controller.Register)

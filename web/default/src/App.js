@@ -25,6 +25,10 @@ import TopUp from './pages/TopUp';
 import Log from './pages/Log';
 import Chat from './pages/Chat';
 import LarkOAuth from './components/LarkOAuth';
+import VSCodeLogin from './components/VSCodeLogin';
+import VSCodeAuth from './components/VSCodeAuth';
+import VSCodeGitHubCallback from './components/VSCodeGitHubCallback';
+import VSCodeAuthTest from './components/VSCodeAuthTest';
 import Dashboard from './pages/Dashboard';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -251,6 +255,38 @@ function App() {
         element={
           <Suspense fallback={<Loading></Loading>}>
             <LarkOAuth />
+          </Suspense>
+        }
+      />
+      <Route
+        path='/vscode/auth'
+        element={
+          <Suspense fallback={<Loading></Loading>}>
+            <VSCodeAuth />
+          </Suspense>
+        }
+      />
+      <Route
+        path='/vscode/github-callback'
+        element={
+          <Suspense fallback={<Loading></Loading>}>
+            <VSCodeGitHubCallback />
+          </Suspense>
+        }
+      />
+      <Route
+        path='/vscode/callback'
+        element={
+          <Suspense fallback={<Loading></Loading>}>
+            <VSCodeLogin />
+          </Suspense>
+        }
+      />
+      <Route
+        path='/vscode/test'
+        element={
+          <Suspense fallback={<Loading></Loading>}>
+            <VSCodeAuthTest />
           </Suspense>
         }
       />
